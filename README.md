@@ -88,7 +88,7 @@ ylabel("R_{max}");
 
 ### Manual Calculation:
 
-asdfghj
+<img width="542" height="780" alt="image" src="https://github.com/user-attachments/assets/f4a16403-41e8-4a04-9dcc-830e9ef5b435" />
 
 ---
 
