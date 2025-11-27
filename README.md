@@ -28,67 +28,47 @@ $$R_{max} = \left(\frac{P_t G \sigma A_e}{(4 \pi)^2 S_{min}} \right)^{\frac{1}{4
 ### Program:
 
 ```sci
-G = 40;
-eta = 0.5;
-Ae = 1;
+clc;
+clear;
+c = 3e8; 
 
-Smin = 1e-10;
-
-Ppeak= 2000:100:10000; 
-
-Rmax_values = zeros(1, length(Ppeak));
-
-for i = 1:length(Ppeak)
-    Rmax_values(i) = ((Ppeak(i) * G * eta * Ae) / (16 * %pi^2 * Smin))^(1/4);
+Gt = 25;
+Gr = 25;
+f = 10e9; 
+sigma = 1; 
+Pmin = 1e-10;
+lambda = c / f;
+Pt = [100, 500, 1000, 2000, 5000, 10000];
+Rmax = zeros(Pt);
+for i = 1:length(Pt)
+    Rmax(i) = ((Pt(i) * Gt * Gr * (lambda^2) * sigma) / ((4 * %pi)^3 * Pmin))^(1/4);
 end
 
-clf;
-subplot(3,1,1);
-plot(Ppeak, Rmax_values,'b');
-xlabel('P_{peak}');
-ylabel('R_{max}');
+scf(0);
+plot(Pt, Pt, 'r', 'LineWidth', 2);
 
-clear "G" "Rmax_values" "Ppeak";
-Ppeak = 5000;
-G = 10:5:100;
-Rmax_values = zeros(1, length(G));
+scf(1);
+plot(Pt, Rmax, 'b', 'LineWidth', 2);
 
-for i = 1:length(G)
-    Rmax_values(i) = ((Ppeak * G(i) * eta * Ae) / (16 * %pi^2 * Smin))^(1/4);
-end
+scf(2);
+plot(Rmax, Pt, 'g', 'LineWidth', 2);
 
-subplot(3,1,2);
-plot(G, Rmax_values,'r');
-xlabel("G");
-ylabel("R_{max}");
+disp("Transmitted Power (W)   |   Maximum Range (m)");
+disp([Pt' Rmax']);
 
-clear "G" "Rmax_values" "Smin";
-G = 40;
-Smin_values = logspace(-12, -8, 50);
-Rmax_values = zeros(1, length(Smin_values));
-
-for i = 1:length(Smin_values)
-    Rmax_values(i) = ((Ppeak * G * eta * Ae) / (16 * %pi^2 * Smin_values(i)))^(1/4);
-end
-
-subplot(3,1,3);
-plot(Smin_values, Rmax_values,'g');
-xlabel("S_{min}");
-ylabel("R_{max}");
 ```
 
 ---
 
 ### Output Waveform:
 
-<img width="1536" height="800" alt="image" src="https://github.com/user-attachments/assets/5e62b980-a4e7-4bda-bf49-27824e761b6a" />
-
+<img width="1919" height="1134" alt="image" src="https://github.com/user-attachments/assets/e455ff15-1211-41e6-be48-acc25cb427af" />
 
 ---
 
 ### Manual Calculation:
 
-<img width="859" height="1280" alt="image" src="https://github.com/user-attachments/assets/d6fecd61-a3f2-47f5-8b4f-f542778718fe" />
+![WhatsApp Image 2025-11-27 at 19 26 28_bd4ada28](https://github.com/user-attachments/assets/d70ed385-dfa4-46f1-9ce8-da42b5e6515e)
 
 ---
 
